@@ -11,10 +11,16 @@ const STATIC_DOMAIN = "enormously-pretty-egret.ngrok-free.app";
 async function startNgrok() {
   console.log("🚀 启动 ngrok 隧道 (使用静态域名)...");
 
-  // 启动 ngrok 使用静态域名
+  // 启动 ngrok 使用静态域名，添加跳过浏览器警告的头部
   const ngrok = spawn(
     "ngrok",
-    ["http", `--url=${STATIC_DOMAIN}`, HTTPS_PORT, "--log=stdout"],
+    [
+      "http",
+      `--url=${STATIC_DOMAIN}`,
+      HTTPS_PORT,
+      "--log=stdout",
+      "--request-header-add=ngrok-skip-browser-warning:true",
+    ],
     {
       stdio: ["pipe", "pipe", "pipe"],
     }
@@ -36,7 +42,7 @@ async function startNgrok() {
       // 保存 URL 到文件
       fs.writeFileSync(CONFIG_FILE, staticUrl);
 
-      console.log("✅ ngrok 隧道已建立 (静态域名)!");
+      console.log("✅ ngrok 隧道已建立 (静态域名，已跳过警告页面)!");
       console.log(`📱 公网访问地址: ${staticUrl}`);
       console.log(`🔒 本地服务器: http://localhost:${HTTPS_PORT}`);
       console.log("");
