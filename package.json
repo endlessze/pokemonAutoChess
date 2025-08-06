@@ -26,7 +26,7 @@
     "dev-client": "node esbuild.js --dev",
     "dev-server": "ts-node-dev --watch \"src/**/*\" --respawn --transpile-only ./app/index.ts",
     "dev": "npm-run-all --parallel dev-*",
-    "test": "node scripts/test-ngrok.js",
+    "test": "node scripts/dev-with-ngrok.js",
     "ngrok": "node scripts/start-ngrok.js",
     "lint": "npx @biomejs/biome lint app/",
     "build-client": "node esbuild.js --build",
